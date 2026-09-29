@@ -41,7 +41,9 @@ function App() {
 
 
       </Route>
-    )
+    ),
+    // Match the "homepage" path from package.json (e.g. /Campus-MarketPlace on GitHub Pages).
+    { basename: process.env.PUBLIC_URL || "/" }
   );
 
   return (
