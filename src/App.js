@@ -1,24 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+import Layout from "./Layout";
+import Card from "./components/Cards/Card";
+import Form from "./components/form/Form";
+import ProductInfo from "./components/productInfo/ProductInfo";
+import PaymentMethod from "./components/paymentmethod/PaymentMethod";
+import ErrorPage from "./components/errorpage/ErrorPage";
+import Login from "./components/Login/Login";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
+  const [products, setProducts] = useState(() => {
+    try {
+      const added = localStorage.getItem("products");
+      return added ? JSON.parse(added) : [];
+    } catch (error) {
+      console.error("Error parsing localStorage data:", error);
+      return [];
+    }
+
+
+  });
+  const addProduct = (product) => {
+    setProducts((prev) => [...prev, product]);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("products", JSON.stringify(products))
+  }, [products])
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Card products={products} />} />
+        <Route path="productInfo/:productIndex" element={<ProductInfo products={products} />} />
+        <Route path="paymentMethod/:productIndex" element={<PaymentMethod products={products} />} errorElement={<ErrorPage />} />
+        <Route path="/Form" element={<Form addProduct={addProduct} />} />
+        <Route path="/Login" element={<Login />} errorElement={<ErrorPage />} />
+
+
+      </Route>
+    )
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   );
 }
 

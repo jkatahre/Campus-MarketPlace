@@ -14,6 +14,23 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+### Cloudinary image uploads
+
+Create a Cloudinary unsigned upload preset, then create a `.env` file in the project root:
+
+```env
+REACT_APP_CLOUDINARY_CLOUD_NAME=your_cloud_name
+REACT_APP_CLOUDINARY_UPLOAD_PRESET=your_unsigned_upload_preset
+```
+
+Restart the development server after changing `.env`. New listings upload the selected image to Cloudinary and store only its `secure_url` in the product data saved by the app.
+
+### AI product descriptions
+
+The **AI** button on the listing form writes a description from the item name and category using [Pollinations.ai](https://pollinations.ai), a free text AI that needs no API key or signup.
+
+Pollinations blocks direct browser requests, so the form calls `/api/generate-description`, which is handled by `src/setupProxy.js`. That file only runs in the development server (`npm start`); a production build needs this endpoint hosted separately (for example as a serverless function).
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
