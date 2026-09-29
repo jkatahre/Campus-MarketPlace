@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Campus-MarketPlace/static/css/main.aa0bdf16.css",
+    "main.js": "/Campus-MarketPlace/static/js/main.e137a364.js",
+    "static/js/453.95350337.chunk.js": "/Campus-MarketPlace/static/js/453.95350337.chunk.js",
+    "index.html": "/Campus-MarketPlace/index.html",
+    "main.aa0bdf16.css.map": "/Campus-MarketPlace/static/css/main.aa0bdf16.css.map",
+    "main.e137a364.js.map": "/Campus-MarketPlace/static/js/main.e137a364.js.map",
+    "453.95350337.chunk.js.map": "/Campus-MarketPlace/static/js/453.95350337.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.aa0bdf16.css",
+    "static/js/main.e137a364.js"
+  ]
+}
